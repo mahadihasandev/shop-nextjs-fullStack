@@ -1,11 +1,10 @@
-
 import Container from '@/components/Container'
 import { Button } from '@/components/ui/button'
 import React from 'react'
 
-function Home() {
+const page = () => {
   return (
-    <Container>
+     <Container>
       <h2>Home</h2>
       <p className='bg-shop_dark_green'>Lorem ipsum dolor sit amet consectetur
          adipisicing elit. Amet cupiditate eius optio quidem quaerat? Ut
@@ -20,4 +19,4 @@ function Home() {
   )
 }
 
-export default Home
+export default page

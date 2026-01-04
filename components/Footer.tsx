@@ -1,15 +1,13 @@
 import React from 'react'
 import Container from './Container'
 
-function Footer() {
+const Footer = () => {
   return (
-    <footer>
+     <footer>
         <Container>
-
          Footer
-        </Container>
-       
-        </footer>
+        </Container>      
+      </footer>
   )
 }
 
