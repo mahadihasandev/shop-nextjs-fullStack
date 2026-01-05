@@ -6,7 +6,7 @@ const page = () => {
   return (
      <Container>
       <h2>Home</h2>
-      <p className='bg-shop_dark_green'>Lorem ipsum dolor sit amet consectetur
+      <p className='bg-shop_light_pink'>Lorem ipsum dolor sit amet consectetur
          adipisicing elit. Amet cupiditate eius optio quidem quaerat? Ut
           assumenda sed soluta ipsa voluptates, necessitatibus laborum? 
           Accusamus possimus deleniti ipsum incidunt? Atque nihil quibusdam
