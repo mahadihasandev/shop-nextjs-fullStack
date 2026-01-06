@@ -34,7 +34,7 @@ const SideMenu:FC<SideMenuProps> = ({isOpen,onClose}) => {
               ))
             }
         </div>
-        <SocialMedia/>
+        <SocialMedia className='' iconClassName='' toolTipClassName=''/>
       </div>
     </div>
   )
