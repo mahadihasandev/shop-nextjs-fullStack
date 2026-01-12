@@ -4,7 +4,7 @@ import React from 'react'
 
 const Logo = ({className,spanDesign}:{className:string,spanDesign?:string}) => {
   return (
-    <Link href={'/'}>
+    <Link className='inline-flex' href={'/'}>
     <h2 className={cn("text-2xl text-shop_dark_blue font-black tracking-wide uppercase hover:text-shop_light_blue group font-sans",
         className)}>
         Aura
