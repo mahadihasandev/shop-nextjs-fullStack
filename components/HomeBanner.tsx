@@ -1,4 +1,6 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useState } from 'react'
+
 import {
   Carousel,
   CarouselContent,
@@ -7,15 +9,38 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 import Image from 'next/image'
+import { client } from '@/sanity/lib/client'
+import { Banner } from '@/sanity.types'
+import { urlFor } from '@/sanity/lib/image'
+import Autoplay from "embla-carousel-autoplay"
 
-interface Banner {
-  _id: string;
-  title?: string;
-  image: string;
-}
-const HomeBanner = async() => {
-     const data:Response = await fetch('https://e-commerce-backend-multivandor.vercel.app/api/v1/product/viewbanner')
-    const posts= await data.json()
+const HomeBanner = () => {
+  const [banner,setBanner]=useState<Banner[]>([])
+  
+  
+    const quarry=`*[_type=="banner"]| order(name desc){
+    ...
+}`
+const plugin = React.useRef(
+    Autoplay({ delay: 4500, stopOnInteraction: false })
+  )
+useEffect(()=>{
+  const fetchData= async ()=>{
+    
+    try {
+      const response=await client.fetch(quarry)
+      setBanner(response);
+      
+      
+    } catch (error) {
+      console.log("fetchData",error);
+      
+    }finally{
+      
+    }
+  }
+  fetchData()
+},[])
   
   return (
     <div>
@@ -25,10 +50,11 @@ const HomeBanner = async() => {
           align: "start",
           loop: true,
         }}
+        plugins={[plugin.current]}
       >
         <CarouselContent>
           
-          {posts.map((item:Banner, index: number) => (
+          {banner.map((item,index) => (
             <CarouselItem key={item._id || index}>
               <div className="rounded-lg h-full overflow-hidden flex items-center justify-center">
                 <Image 
@@ -36,7 +62,7 @@ const HomeBanner = async() => {
                   width={1200} 
                   height={357} 
                   alt={item.title || 'banner image'} 
-                  src={item.image}
+                  src={item.image ? urlFor(item.image).url() : '/fallback-image.png'}
                   priority={index === 0} 
                 />
               </div>
