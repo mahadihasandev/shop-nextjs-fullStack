@@ -1,0 +1,38 @@
+import React from 'react'
+import { Title } from './ui/text'
+import { Category } from '@/sanity.types'
+import Image from 'next/image';
+import { urlFor } from '@/sanity/lib/image';
+import Link from 'next/link';
+
+
+const HomeCategories = ({categories}:{categories:Category[]}) => {
+  console.log(categories);
+  
+  return (
+    <div className='bg-white border border-shop_light_blue/20 my-10 md:my-20 p-5 lg:p-7 rounded-md'>
+        <Title className='border-b pb-3'>
+            Popular Categories
+        </Title>
+        <div className='mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
+          {categories?.map((categories)=>(
+            <div key={categories._id} className='bg-shop_light_bg p-5 flex items-center gap-3 group'>
+              <div className='overflow-hidden border border-shop_orange/30 
+              hover:border-shop_orange hoverEffect w-20 h-20 p-1'>
+                <Link href={`/category/${categories?.slug?.current}`}>
+                {categories?.image&&<Image 
+              className='w-full h-full object-cover group-hover:scale-110 hoverEffect' 
+              alt='CategoryImage' 
+              width={500} 
+              height={500} 
+              src={urlFor(categories?.image).url()}/>}
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+    </div>
+  )
+}
+
+export default HomeCategories

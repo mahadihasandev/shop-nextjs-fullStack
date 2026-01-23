@@ -10,11 +10,14 @@ interface Props{
 }
 
 const AddToCartButton = ({product,className}:Props) => {
+  const handleAddToCart=()=>{
+    alert("button")
+  }
 
   const outOfStock=product?.stock==0
   return (
     <div>
-      <Button disabled={outOfStock} className={cn("w-full bg-shop_dark_blue/80 text-shop_light_bg shadow-none border-shop_dark_blue/80 font-semibold tracking-wide hover:text-white hover:bg-shop_dark_blue hover:border-shop_dark_blue",className)}>
+      <Button onClick={handleAddToCart} disabled={outOfStock} className={cn("w-full bg-shop_dark_blue/80 text-shop_light_bg shadow-none border-shop_dark_blue/80 font-semibold tracking-wide hover:text-white hover:bg-shop_dark_blue hover:border-shop_dark_blue",className)}>
         <HiShoppingBag/>
         {outOfStock?"Out of Stock":"Add to Cart"}
       </Button>
