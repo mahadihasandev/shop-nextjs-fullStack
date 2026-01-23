@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import HomeTabBar from './HomeTabBar'
 import { productType } from '@/constant/data'
 import { client } from '@/sanity/lib/client'
-import { animate, AnimatePresence, motion } from "motion/react"
+import { AnimatePresence, motion } from "motion/react"
 import { TbLoader3 } from "react-icons/tb";
 import NoProductAvailable from "./NoProductAvailable"
 import ProductCard from './ProductCard'
@@ -19,6 +19,7 @@ const params={variant:selectedTab.toLowerCase()}
   const quarry=`*[_type=="product" && variant==$variant]| order(name desc){
 ...,"categories":categories[]->title
 }`
+
 
 
 useEffect(()=>{

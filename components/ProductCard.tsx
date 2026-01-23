@@ -5,6 +5,9 @@ import Link from 'next/link'
 import { GiFlame } from "react-icons/gi";
 import AddToWishListButton from './AddToWishListButton';
 import { Title } from './ui/text';
+import { HiMiniStar } from "react-icons/hi2";
+import PriceView from './PriceView';
+import AddToCartButton from './AddToCartButton';
 
 
 const ProductCard = ({product}:{product:Product}) => {
@@ -34,11 +37,31 @@ const ProductCard = ({product}:{product:Product}) => {
         <div className='p-3'>
           {product?.categories&&(<p className='uppercase line-clamp-1 text-xs font-sans text-shop_light_text'>{ product?.categories?.map((cat)=>cat).join(",")}</p>)}
           <Title className='text-sm! line-clamp-1'>{product?.name}</Title>
-          <div>
-            <div>
-              
+          <div className='flex items-center gap-2'>
+            <div className='flex items-center gap-0.5'>
+              {
+                [...Array(5)].map((_,index)=>(
+                    <HiMiniStar 
+                    key={index}
+                    size={15}
+                    className={index<4?"text-shop_light_blue":"text-shop_light_text"}
+                    fill={index<4?"#53aaff":"#ababab"}
+                    />
+                ))
+              }
             </div>
+            <p className='text-xs tracking-wide text-shop_light_text'>5 Review</p>
           </div>
+          <div className='flex items-center gap-2.5'>
+            <p className='font-medium text-sm font-sans'>
+              In Stock
+            </p>
+            <p className={`text-shop_light_blue font-semibold text-sm ${product?.stock==0 ?"text-red-600!":"text-shop_light_blue font-semibold text-sm"}`}>
+              {product?.stock as number>0?product?.stock:"unavailable"}
+            </p>
+          </div>
+          <PriceView price={product?.price} discount={product?.discount} className='text-sm'/>
+          <AddToCartButton product={product} className="rounded-full mt-1"/>
         </div>
     </div>
   )
