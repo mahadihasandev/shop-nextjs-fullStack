@@ -1,12 +1,13 @@
 
 import { sanityFetch } from "./live";
+import { BRAND_QUERY } from "./query";
 
 const getCategories=async(quantity?:number)=>{
     try {
         const query=quantity
         ?`*[_type=='category']| order(name asc) [0...$quantity]{
         ...,
-        "productCount":count(*[_type=="product"&& references(^.id)])
+        "productCount":count(*[_type=="product"&& references(^._id)])
         }`
         :`*[_type=='category']| order(name asc) {
         ...,
@@ -22,6 +23,20 @@ const getCategories=async(quantity?:number)=>{
         return []
         
     }
+
 }
 
-export {getCategories}
+const getAllBrands=async()=>{
+    try {
+        const {data}=await sanityFetch({
+            query:BRAND_QUERY
+        })
+        return data ?? [];
+        
+    } catch (error) {
+       console.log(error,"Error fetching categories");
+        return [] 
+    }
+}
+
+export {getCategories,getAllBrands}

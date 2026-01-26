@@ -1,10 +1,12 @@
 import Container from '@/components/Container'
 import HomeBanner from '@/components/HomeBanner'
 import HomeCategories from '@/components/HomeCategories'
+import LetestBlog from '@/components/LetestBlog'
 import ProductGrid from '@/components/ProductGrid'
+import ShopByBrands from '@/components/ShopByBrands'
 import StaticHomeBanner from '@/components/StaticHomeBanner'
 import { getCategories } from '@/sanity/lib'
-import { number } from 'motion/react'
+
 
 const page = async() => {
   const categories=await getCategories(6)
@@ -19,6 +21,8 @@ const page = async() => {
       <ProductGrid/>
      </div>
      <HomeCategories categories={categories}/>
+     <ShopByBrands/>
+     <LetestBlog/>
      
     </Container>
   )
