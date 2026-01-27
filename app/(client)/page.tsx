@@ -1,7 +1,7 @@
 import Container from '@/components/Container'
 import HomeBanner from '@/components/HomeBanner'
 import HomeCategories from '@/components/HomeCategories'
-import LetestBlog from '@/components/LetestBlog'
+import LatestBlog from '@/components/LatestBlog'
 import ProductGrid from '@/components/ProductGrid'
 import ShopByBrands from '@/components/ShopByBrands'
 import StaticHomeBanner from '@/components/StaticHomeBanner'
@@ -22,8 +22,7 @@ const page = async() => {
      </div>
      <HomeCategories categories={categories}/>
      <ShopByBrands/>
-     <LetestBlog/>
-     
+     <LatestBlog/>     
     </Container>
   )
 }
