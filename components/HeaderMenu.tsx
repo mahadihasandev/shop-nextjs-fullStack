@@ -8,7 +8,7 @@ const HeaderMenu = () => {
   
   
   return (
-    <div className='hidden md:inline-flex items-center capitalize z-10 font-semibold text-shop_dark_blue gap-7'>
+    <div className='hidden md:inline-flex items-center justify-center capitalize z-10 font-semibold text-shop_dark_blue gap-8'>
         {headerData.map((item)=>(
             <Link key={item.title} href={item?.href}
             className={`hover:text-white hoverEffect relative group z-10 transition-colors duration-300 isolate ${pathname==item?.href&&'text-white'}`}

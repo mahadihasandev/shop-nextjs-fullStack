@@ -1,6 +1,6 @@
 
 import { sanityFetch } from "./live";
-import { BLOG_QUERY, BRAND_QUERY } from "./query";
+import { BLOG_QUERY, BRAND_QUERY, HOT_DEAL_QUERY } from "./query";
 
 const getCategories=async(quantity?:number)=>{
     try {
@@ -52,4 +52,17 @@ const getLatestBlogs=async()=>{
     }
 }
 
-export {getCategories,getAllBrands,getLatestBlogs}
+const getHotDeals=async()=>{
+    try {
+        const {data}=await sanityFetch({
+            query:HOT_DEAL_QUERY
+        })
+        return data ?? [];
+        
+    } catch (error) {
+       console.log(error,"Error fetching categories");
+        return [] 
+    }
+}
+
+export {getCategories,getAllBrands,getLatestBlogs,getHotDeals}

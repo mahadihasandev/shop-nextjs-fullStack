@@ -477,11 +477,52 @@ export type BLOG_QUERY_RESULT = Array<{
   body?: BlockContent;
 }>;
 
+// Source: sanity\lib\query.ts
+// Variable: HOT_DEAL_QUERY
+// Query: *[_type == "product"&& status=="hot"]| order(name asc){  ...,"categories":categories[]->title}
+export type HOT_DEAL_QUERY_RESULT = Array<{
+  _id: string;
+  _type: "product";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  images?: Array<{
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
+  description?: string;
+  price?: number;
+  discount?: number;
+  categories: Array<string | null> | null;
+  stock?: number;
+  brand?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "brand";
+  };
+  status: "hot";
+  variant?: "appliances" | "gadget" | "others" | "refrigerators";
+  isFeatured?: boolean;
+}>;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     '*[_type == "brand"]|order(name asc)': BRAND_QUERY_RESULT;
     '*[_type == "blog"&& isLatest==true]| order(name asc){\n  ...,blogcategories[]->{title}\n}': BLOG_QUERY_RESULT;
+    '*[_type == "product"&& status=="hot"]| order(name asc){\n  ...,"categories":categories[]->title\n}': HOT_DEAL_QUERY_RESULT;
   }
 }

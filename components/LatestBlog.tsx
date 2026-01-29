@@ -8,7 +8,6 @@ import dayjs from 'dayjs'
 
 const LatestBlog = async () => {
   const blogs = await getLatestBlogs();
-  console.log(blogs, "blogs");
 
   return (
     <div className="mb-10 md:mb-20">
