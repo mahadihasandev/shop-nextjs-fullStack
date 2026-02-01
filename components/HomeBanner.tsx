@@ -13,13 +13,14 @@ import { client } from '@/sanity/lib/client'
 import { Banner } from '@/sanity.types'
 import { urlFor } from '@/sanity/lib/image'
 import Autoplay from "embla-carousel-autoplay"
+import Link from 'next/link'
 
 const HomeBanner = () => {
   const [banner,setBanner]=useState<Banner[]>([])
   
   
     const quarry=`*[_type=="banner"]| order(name desc){
-    ...
+    ...,"productSlug":product[]->slug.current
 }`
 const plugin = React.useRef(
     Autoplay({ delay: 4500, stopOnInteraction: false })
@@ -29,6 +30,8 @@ useEffect(()=>{
     
     try {
       const response=await client.fetch(quarry)
+      console.log(response);
+      
       setBanner(response);
       
       
@@ -56,7 +59,9 @@ useEffect(()=>{
           
           {banner.map((item,index) => (
             <CarouselItem key={item._id || index}>
-              <div className="rounded-lg h-full overflow-hidden flex items-center justify-center">
+              <div className="rounded-lg h-full overflow-hidden 
+              flex items-center justify-center">
+                <Link href={`/product/${item?.productSlug?.[0]}`}>
                 <Image 
                   className="w-full object-cover" 
                   width={1200} 
@@ -65,6 +70,7 @@ useEffect(()=>{
                   src={item.image ? urlFor(item.image).url() : '/fallback-image.png'}
                   priority={index === 0} 
                 />
+                </Link>
               </div>
             </CarouselItem>
           ))}

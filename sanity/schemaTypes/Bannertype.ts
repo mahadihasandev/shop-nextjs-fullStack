@@ -26,7 +26,12 @@ export const BannerType=defineType({
             }
             
         }),
-
+         defineField({
+      name: "productSlug",
+      title: "Product",
+      type: "array",
+      of: [{ type: "reference", to: { type: "product" } }],
+    }),
     ],
         preview:{
         select:{

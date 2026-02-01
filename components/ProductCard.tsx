@@ -15,12 +15,16 @@ const ProductCard = ({product}:{product:Product}) => {
   return (
     <div className='border border-shop_dark_blue/20 group bg-white rounded-md shadow-[2px_2px_5px_-2px_#29b8ff] hover:scale-105 hoverEffect'>
         <div className='relative bg-shop_light_bg rounded-md overflow-hidden'>
+          <Link href={`/product/${product?.slug?.current}`}>
             {product?.images&&<Image 
             height={700} 
             width={700}  
             alt='ProductImage' 
-            className={`w-full h-64 object-contain overflow-hidden transition-transform bg-shop_light_bg duration-500 ease ${product?.stock!==0?"group-hover:scale-105":"opacity-50"}`}
+            className={`w-full h-64 object-contain overflow-hidden transition-transform bg-shop_light_bg duration-500 ease 
+              ${product?.stock!==0?"group-hover:scale-105":"opacity-50"}`}
+              
             src={urlFor(product?.images[0]).url()} loading='lazy'/>}
+            </Link>
             <AddToWishListButton product={product} className=""/> 
             {product?.status=="sale" && <p className='absolute left-2 top-2 z-10 text-xs border border-darkColor/50 px-2 rounded-full group-hover:border-shop_light_blue group-hover:text-darkColor hoverEffect group-hover:bg-shop_light_blue/20 '>Sale!</p>}
             {product?.status=="new" && <p className='absolute left-2 top-2 z-10 text-xs border border-darkColor/50 px-2 rounded-full group-hover:border-shop_light_blue group-hover:text-darkColor hoverEffect group-hover:bg-shop_light_blue/20'>New!</p>}

@@ -33,6 +33,13 @@ export type Banner = {
     crop?: SanityImageCrop;
     _type: "image";
   };
+  productSlug?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "product";
+  }>;
 };
 
 export type SanityImageCrop = {
@@ -517,6 +524,52 @@ export type HOT_DEAL_QUERY_RESULT = Array<{
   isFeatured?: boolean;
 }>;
 
+// Source: sanity\lib\query.ts
+// Variable: SINGLE_PRODUCT_QUERY
+// Query: *[_type == "product" && slug.current==$slug]| order(name asc) [0]
+export type SINGLE_PRODUCT_QUERY_RESULT = {
+  _id: string;
+  _type: "product";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  images?: Array<{
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
+  description?: string;
+  price?: number;
+  discount?: number;
+  categories?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "category";
+  }>;
+  stock?: number;
+  brand?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "brand";
+  };
+  status?: "hot" | "new" | "sale";
+  variant?: "appliances" | "gadget" | "others" | "refrigerators";
+  isFeatured?: boolean;
+} | null;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
@@ -524,5 +577,6 @@ declare module "@sanity/client" {
     '*[_type == "brand"]|order(name asc)': BRAND_QUERY_RESULT;
     '*[_type == "blog"&& isLatest==true]| order(name asc){\n  ...,blogcategories[]->{title}\n}': BLOG_QUERY_RESULT;
     '*[_type == "product"&& status=="hot"]| order(name asc){\n  ...,"categories":categories[]->title\n}': HOT_DEAL_QUERY_RESULT;
+    '*[_type == "product" && slug.current==$slug]| order(name asc) [0]': SINGLE_PRODUCT_QUERY_RESULT;
   }
 }
