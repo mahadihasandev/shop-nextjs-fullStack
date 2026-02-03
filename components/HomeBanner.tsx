@@ -29,12 +29,8 @@ useEffect(()=>{
   const fetchData= async ()=>{
     
     try {
-      const response=await client.fetch(quarry)
-      console.log(response);
-      
-      setBanner(response);
-      
-      
+      const response=await client.fetch(quarry) 
+      setBanner(response); 
     } catch (error) {
       console.log("fetchData",error);
       
@@ -46,25 +42,23 @@ useEffect(()=>{
 },[])
   
   return (
-    <div>
+    
     <Carousel 
-        className="w-full pt-4"
+        className="w-full mt-2"
         opts={{
           align: "start",
           loop: true,
         }}
         plugins={[plugin.current]}
       >
-        <CarouselContent>
-          
+        <CarouselContent>          
           {banner.map((item,index) => (
             <CarouselItem key={item._id || index}>
-              <div className="rounded-lg h-full overflow-hidden 
-              flex items-center justify-center">
+              <div className="rounded-lg h-full w-full overflow-hidden flex items-center justify-center">
                 <Link href={`/product/${item?.productSlug?.[0]}`}>
                 <Image 
-                  className="w-full object-cover" 
-                  width={1200} 
+                  className="w-full h-full object-cover" 
+                  width={1300} 
                   height={357} 
                   alt={item.title || 'banner image'} 
                   src={item.image ? urlFor(item.image).url() : '/fallback-image.png'}
@@ -78,7 +72,7 @@ useEffect(()=>{
         <CarouselPrevious />
         <CarouselNext />
       </Carousel>
-    </div>
+   
   )
 }
 

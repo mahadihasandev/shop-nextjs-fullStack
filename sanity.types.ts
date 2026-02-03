@@ -79,7 +79,8 @@ export type Product = {
     _type: "image";
     _key: string;
   }>;
-  description?: string;
+  keyfeature?: BlockContent;
+  description?: BlockContent;
   price?: number;
   discount?: number;
   categories?: Array<{
@@ -100,6 +101,41 @@ export type Product = {
   variant?: "gadget" | "appliances" | "refrigerators" | "others";
   isFeatured?: boolean;
 };
+
+export type BlockContent = Array<
+  | {
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+      listItem?: "bullet";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }
+  | {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+      _key: string;
+    }
+>;
 
 export type Slug = {
   _type: "slug";
@@ -167,41 +203,6 @@ export type Blog = {
   isLatest?: boolean;
   body?: BlockContent;
 };
-
-export type BlockContent = Array<
-  | {
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
-      listItem?: "bullet";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }
-  | {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      _type: "image";
-      _key: string;
-    }
->;
 
 export type Blogcategory = {
   _id: string;
@@ -396,10 +397,10 @@ export type AllSanitySchemaTypes =
   | SanityImageCrop
   | SanityImageHotspot
   | Product
+  | BlockContent
   | Slug
   | Brand
   | Blog
-  | BlockContent
   | Blogcategory
   | Author
   | Address
@@ -508,7 +509,8 @@ export type HOT_DEAL_QUERY_RESULT = Array<{
     _type: "image";
     _key: string;
   }>;
-  description?: string;
+  keyfeature?: BlockContent;
+  description?: BlockContent;
   price?: number;
   discount?: number;
   categories: Array<string | null> | null;
@@ -548,7 +550,8 @@ export type SINGLE_PRODUCT_QUERY_RESULT = {
     _type: "image";
     _key: string;
   }>;
-  description?: string;
+  keyfeature?: BlockContent;
+  description?: BlockContent;
   price?: number;
   discount?: number;
   categories?: Array<{
@@ -570,6 +573,13 @@ export type SINGLE_PRODUCT_QUERY_RESULT = {
   isFeatured?: boolean;
 } | null;
 
+// Source: sanity\lib\query.ts
+// Variable: BRANDS_QUERY
+// Query: *[_type=='product' && slug.current==$slug]{  "brandName":brand->title}
+export type BRANDS_QUERY_RESULT = Array<{
+  brandName: string | null;
+}>;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
@@ -578,5 +588,6 @@ declare module "@sanity/client" {
     '*[_type == "blog"&& isLatest==true]| order(name asc){\n  ...,blogcategories[]->{title}\n}': BLOG_QUERY_RESULT;
     '*[_type == "product"&& status=="hot"]| order(name asc){\n  ...,"categories":categories[]->title\n}': HOT_DEAL_QUERY_RESULT;
     '*[_type == "product" && slug.current==$slug]| order(name asc) [0]': SINGLE_PRODUCT_QUERY_RESULT;
+    "*[_type=='product' && slug.current==$slug]{\n  \"brandName\":brand->title\n}": BRANDS_QUERY_RESULT;
   }
 }

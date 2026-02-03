@@ -1,6 +1,7 @@
 import { sanityFetch } from "./live";
 import {
   BLOG_QUERY,
+  BRANDS_QUERY,
   BRAND_QUERY,
   HOT_DEAL_QUERY,
   SINGLE_PRODUCT_QUERY,
@@ -35,7 +36,7 @@ const getAllBrands = async () => {
     });
     return data ?? [];
   } catch (error) {
-    console.log(error, "Error fetching categories");
+    console.log(error, "Error fetching all brands");
     return [];
   }
 };
@@ -47,7 +48,7 @@ const getLatestBlogs = async () => {
     });
     return data ?? [];
   } catch (error) {
-    console.log(error, "Error fetching categories");
+    console.log(error, "Error fetching latest blogs");
     return [];
   }
 };
@@ -59,7 +60,7 @@ const getHotDeals = async () => {
     });
     return data ?? [];
   } catch (error) {
-    console.log(error, "Error fetching categories");
+    console.log(error, "Error fetching hot deals");
     return [];
   }
 };
@@ -72,10 +73,23 @@ const getSingleProduct = async (slug: string) => {
     });
     return product?.data || null;
   } catch (error) {
-    console.log(error, "Error fetching categories");
+    console.log(error, "Error fetching product");
     return null;
   }
 };
+
+const getBrands=async(slug:string)=>{
+  try {
+    const brands=await sanityFetch({
+      query:BRANDS_QUERY,
+      params:{slug}
+    })
+    return brands?.data||null
+  } catch (error) {
+    console.log(error,"Error fetching brands")
+    return null
+  }
+}
 
 export {
   getCategories,
@@ -83,4 +97,5 @@ export {
   getLatestBlogs,
   getHotDeals,
   getSingleProduct,
+  getBrands
 };

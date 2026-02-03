@@ -3,7 +3,7 @@ import React from 'react'
 
 const Title = ({children,className}:{children:React.ReactNode,className:string}) => {
   return (
-    <h2 className={cn('md:text-3xl font-bold text-shop_dark_blue capitalize tracking-wide',className)}>{children}</h2>
+    <h2 className={cn('md:text-3xl font-bold text-blue-800 capitalize tracking-wide',className)}>{children}</h2>
   )
 }
 

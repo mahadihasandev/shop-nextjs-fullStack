@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils'
 import { Product } from '@/sanity.types'
 import { HeartPlus } from 'lucide-react'
 import Link from 'next/link'
@@ -5,14 +6,16 @@ import React from 'react'
 
 const FavoriteButton = ({
   product,
-  showProduct=false}:{
+  showProduct=false,
+  className}:{
   product:Product|null|undefined;
   showProduct:boolean;
+  className?:string;
 }) => {
   return (
 <>
 {!showProduct?(
-        <Link href={"/wishlist"} className='group relative'>
+        <Link href={"/wishlist"} className={cn(`group relative`,className)}>
       <HeartPlus className='text-shop_dark_blue w-5 h-5 
       group-hover:text-shop_light_blue hoverEffect'/>
       <span className='absolute -top-1 -right-1 bg-shop_dark_blue 

@@ -29,10 +29,15 @@ export const ProductType = defineType({
       type: "array",
       of: [{ type: "image", options: { hotspot: true } }],
     }),
+     defineField({
+      name: "keyfeature",
+      title: "Key Features",
+      type: "blockContent",
+    }),
     defineField({
       name: "description",
       title: "Description",
-      type: "string",
+      type: "blockContent",
     }),
     defineField({
       name: "price",
