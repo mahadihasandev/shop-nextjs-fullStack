@@ -282,6 +282,7 @@ export type Category = {
   description?: string;
   range?: number;
   feature?: boolean;
+  productCount?: number;
   image?: {
     asset?: {
       _ref: string;

@@ -18,7 +18,6 @@ const CategoryProduct = ({ categories, slugs }: Props) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  console.log(products);
 
   const fetchProducts = async (categorySlug:string) => {
     try {
@@ -35,9 +34,6 @@ const CategoryProduct = ({ categories, slugs }: Props) => {
       setLoading(false);
     }
   };
-
-
-  
 
   const handleCategoryChange = (newSlug: string) => {
     if (newSlug == currentSlug) return;

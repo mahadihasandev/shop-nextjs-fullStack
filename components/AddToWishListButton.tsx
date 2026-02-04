@@ -7,7 +7,7 @@ const AddToWishListButton = ({
   product,
   className,
 }: {
-  product: Product | HOT_DEAL_QUERY_RESULT[number];
+  product: Product | null | undefined;
   className: string;
 }) => {
   return (

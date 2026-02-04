@@ -2,7 +2,6 @@ import React from "react";
 import { getHotDeals } from "@/sanity/lib";
 import { Title } from "@/components/ui/text";
 import ProductCard from "@/components/ProductCard";
-
 import Container from "@/components/Container";
 
 const DealPage = async () => {
@@ -19,7 +18,7 @@ const DealPage = async () => {
         </Title>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5">
           {hotDeals.map((product) => (
-            <ProductCard key={product._id} product={product} />
+            <ProductCard key={product._id} product={product as any} />
           ))}
         </div>
       </Container>

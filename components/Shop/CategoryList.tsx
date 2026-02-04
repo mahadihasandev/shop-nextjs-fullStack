@@ -10,6 +10,8 @@ interface Props{
 }
 
 const CategoryList = ({categories,selectedCategory,setSelectedCategory}:Props) => {
+  // console.log(selectedCategory,"selectedCategory");
+  
   return (
     <div className='w-full bg-white p-4'>
       <Title className='text-base! text-shop_dark_blue/80 uppercase tracking-wide font-sans

@@ -4,14 +4,22 @@ import { HiShoppingBag } from "react-icons/hi2";
 import React from "react";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
+import useStore from "@/store";
 interface Props {
-  product: Product | HOT_DEAL_QUERY_RESULT[number] | null | undefined;
+  product: Product;
   className?: string;
 }
 
 const AddToCartButton = ({ product, className }: Props) => {
+
+  const{getItemCount,addItem}=useStore()
+  const itemCount=getItemCount(product._id)
+  console.log(itemCount)
   const handleAddToCart = () => {
-    alert("button");
+    if((product.stock as number)>itemCount){
+      addItem(product)
+      
+    }
   };
 
   const outOfStock = product?.stock == 0;

@@ -8,14 +8,17 @@ import { Title } from "./ui/text";
 import { HiMiniStar } from "react-icons/hi2";
 import PriceView from "./PriceView";
 import AddToCartButton from "./AddToCartButton";
-
+import { cn } from "@/lib/utils";
+interface Props{
+  product:Product|null|undefined;
+  className?:string;
+}
 const ProductCard = ({
   product,
-}: {
-  product: Product;
-}) => {
+  className
+}: Props) => {
   return (
-    <div className="border border-shop_dark_blue/20 group bg-white rounded-md shadow-[2px_2px_5px_-2px_#29b8ff] hover:scale-105 hoverEffect">
+    <div className={cn(`border border-shop_dark_blue/20 group bg-white rounded-md shadow-[2px_2px_5px_-2px_#29b8ff] hover:scale-105 hoverEffect`,className)}>
       <div className="relative bg-shop_light_bg rounded-md overflow-hidden">
         <Link href={`/product/${product?.slug?.current}`}>
           {product?.images && (
