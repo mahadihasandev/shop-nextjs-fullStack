@@ -20,8 +20,6 @@ const params={variant:selectedTab.toLowerCase()}
 ...,"categories":categories[]->title
 }`
 
-
-
 useEffect(()=>{
   const fetchData= async ()=>{
     setLoading(true)
@@ -38,7 +36,6 @@ useEffect(()=>{
   }
   fetchData()
 },[selectedTab])
-
 
   return (
     <div>

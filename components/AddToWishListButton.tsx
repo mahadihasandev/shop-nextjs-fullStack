@@ -1,18 +1,42 @@
+"use client";
 import { cn } from "@/lib/utils";
-import { Product, HOT_DEAL_QUERY_RESULT } from "@/sanity.types";
-import React from "react";
+import { Product } from "@/sanity.types";
+import useStore from "@/store";
+import toast from "react-hot-toast";
 import { FaHeartCirclePlus } from "react-icons/fa6";
 
 const AddToWishListButton = ({
   product,
   className,
 }: {
-  product: Product | null | undefined;
+  product: Product;
   className: string;
 }) => {
+  const { addToFavorite, favoriteProduct } = useStore();
+  
+  const availableProduct = favoriteProduct.find(
+    (item) => item._id === product._id,
+  );
+ 
+   
+  
+  const handleFavorite = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    if(product._id){
+      addToFavorite(product)
+      .then(() => {
+        toast.success(availableProduct? `${product.name?.substring(0,15)} removed from wishlist`:`${product.name?.substring(0,15)} added to wishlist`);
+      })
+    }
+    
+    
+  };
   return (
-    <div className={cn("absolute top-1 right-2 z-10", className)}>
-      <div className="p-2.5 rounded-full text-shop_dark_blue hover:bg-shop_light_blue hover:text-white hoverEffect bg-blue-100">
+    <div className={cn("", className)}>
+      <div
+        onClick={handleFavorite}
+        className={`p-2.5 rounded-full cursor-pointer text-shop_dark_blue bg-blue-100 hover:bg-blue-300 hover:text-red-400 hoverEffect ${availableProduct&&"bg-blue-300 text-red-400!"}`}
+      >
         <FaHeartCirclePlus size={19} />
       </div>
     </div>

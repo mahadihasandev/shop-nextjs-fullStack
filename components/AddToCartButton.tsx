@@ -5,6 +5,9 @@ import toast from "react-hot-toast";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 import useStore from "@/store";
+import PriceFormatter from "./PriceFormatter";
+import QuantityButton from "./QuantityButton";
+
 interface Props {
   product: Product;
   className?: string;
@@ -26,7 +29,20 @@ const AddToCartButton = ({ product, className }: Props) => {
 
   const outOfStock = product?.stock == 0;
   return (
-    <Button
+    <>
+    {itemCount?(
+     <div className="text-sm w-full">
+      <div className='flex items-center justify-between'>
+        <span className="text-xs font-semibold text-darkColor/80">Quantity</span>
+        <QuantityButton product={product} className=''/>
+      </div>
+      <div className="flex items-center justify-between border-t border-shop_light_blue/30 pt-1">
+        <span className="text-xs font-semibold">Subtotal</span>
+        <PriceFormatter className="" amount={product.price?product.price*itemCount:0}/>
+      </div>
+     </div>
+    ):(
+      <Button
       onClick={handleAddToCart}
       disabled={outOfStock}
       className={cn(
@@ -37,6 +53,8 @@ const AddToCartButton = ({ product, className }: Props) => {
       <HiShoppingBag />
       {outOfStock ? "Out of Stock" : "Add to Cart"}
     </Button>
+    )}
+    </>
   );
 };
 

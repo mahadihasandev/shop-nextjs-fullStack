@@ -10,7 +10,7 @@ import PriceView from "./PriceView";
 import AddToCartButton from "./AddToCartButton";
 import { cn } from "@/lib/utils";
 interface Props{
-  product:Product|null|undefined;
+  product:Product;
   className?:string;
 }
 const ProductCard = ({
@@ -33,7 +33,7 @@ const ProductCard = ({
             />
           )}
         </Link>
-        <AddToWishListButton product={product} className="" />
+        <AddToWishListButton product={product} className="absolute top-1 right-2 z-10" />
         {product?.status == "sale" && (
           <p className="absolute left-2 top-2 z-10 text-xs border border-darkColor/50 px-2 rounded-full group-hover:border-shop_light_blue group-hover:text-darkColor hoverEffect group-hover:bg-shop_light_blue/20 ">
             Sale!

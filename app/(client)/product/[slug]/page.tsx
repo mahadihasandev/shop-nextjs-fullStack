@@ -16,6 +16,7 @@ import ProductDescription from "@/components/ProductDescription";
 import { CornerDownLeft } from "lucide-react";
 
 import { PortableText } from "next-sanity";
+import AddToWishListButton from "@/components/AddToWishListButton";
 
 const SingleProductPage = async ({
   params,
@@ -75,9 +76,10 @@ const SingleProductPage = async ({
             </p>
           </div>
           <div className="flex items-center justify-center gap-2.5 lg:gap-3 px-5">
-            <AddToCartButton className="w-full" product={product} />
-            <FavoriteButton product={product} showProduct={true} />
+            <AddToCartButton className="" product={product} />
+            <AddToWishListButton product={product} className="" />
           </div>
+
           <ProductCharacteristics product={product} />
           <div className="flex flex-wrap items-center justify-between gap-2.5 border-b border-b-gray-200 py-5 -mt-2">
             <div className="flex items-center gap-2 text-sm text-black hover:text-red-600 hoverEffect">

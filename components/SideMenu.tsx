@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import SocialMedia from './SocialMedia'
 import { useOutSideClick } from '@/hooks'
+import { FaWindowClose } from 'react-icons/fa'
 interface SideMenuProps{
   isOpen:boolean,
   onClose:()=>void
@@ -20,7 +21,7 @@ const SideMenu:FC<SideMenuProps> = ({isOpen,onClose}) => {
       className=' min-w-72 max-w-96 bg-black/95 h-screen p-10 border-r-2 border-blue-700 flex flex-col gap-6'>
         <div className='flex items-center justify-between gap-5'>
         <Logo className='text-white' spanDesign="group-hover:text-white"/>
-        <button onClick={onClose} className='text-red-300 hover:text-red-600 hoverEffect'>x</button>
+        <button onClick={onClose} className='text-red-300 hover:text-red-600 hoverEffect'><FaWindowClose size={20} /></button>
         </div>
         <div ref={sideBarRef} className='flex flex-col space-y-7 font-semibold tracking-wide'>
           
