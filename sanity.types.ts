@@ -282,7 +282,6 @@ export type Category = {
   description?: string;
   range?: number;
   feature?: boolean;
-  productCount?: number;
   image?: {
     asset?: {
       _ref: string;
@@ -417,13 +416,7 @@ export type AllSanitySchemaTypes =
 
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
-type ArrayOf<T> = Array<
-  T & {
-    _key: string;
-  }
->;
-
-// Source: sanity\lib\query.ts
+// Source: sanity/lib/query.ts
 // Variable: BRAND_QUERY
 // Query: *[_type == "brand"]|order(name asc)
 export type BRAND_QUERY_RESULT = Array<{
@@ -449,7 +442,7 @@ export type BRAND_QUERY_RESULT = Array<{
   };
 }>;
 
-// Source: sanity\lib\query.ts
+// Source: sanity/lib/query.ts
 // Variable: BLOG_QUERY
 // Query: *[_type == "blog"&& isLatest==true]| order(name asc){  ...,blogcategories[]->{title}}
 export type BLOG_QUERY_RESULT = Array<{
@@ -486,7 +479,7 @@ export type BLOG_QUERY_RESULT = Array<{
   body?: BlockContent;
 }>;
 
-// Source: sanity\lib\query.ts
+// Source: sanity/lib/query.ts
 // Variable: HOT_DEAL_QUERY
 // Query: *[_type == "product"&& status=="hot"]| order(name asc){  ...,"categories":categories[]->title}
 export type HOT_DEAL_QUERY_RESULT = Array<{
@@ -527,7 +520,7 @@ export type HOT_DEAL_QUERY_RESULT = Array<{
   isFeatured?: boolean;
 }>;
 
-// Source: sanity\lib\query.ts
+// Source: sanity/lib/query.ts
 // Variable: SINGLE_PRODUCT_QUERY
 // Query: *[_type == "product" && slug.current==$slug]| order(name asc) [0]
 export type SINGLE_PRODUCT_QUERY_RESULT = {
@@ -574,7 +567,7 @@ export type SINGLE_PRODUCT_QUERY_RESULT = {
   isFeatured?: boolean;
 } | null;
 
-// Source: sanity\lib\query.ts
+// Source: sanity/lib/query.ts
 // Variable: BRANDS_QUERY
 // Query: *[_type=='product' && slug.current==$slug]{  "brandName":brand->title}
 export type BRANDS_QUERY_RESULT = Array<{

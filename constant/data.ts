@@ -4,6 +4,12 @@ export const headerData=[
     {title:"Blog" ,href:"/blog"},
     {title:"Contact" ,href:"/contact"},
     {title:"Hot Deal" ,href:"/deal"},
+    
+];
+
+export const subHeaderData=[
+    {title:"Home" ,href:"/cart"},
+    {title:"Shop" ,href:"/favorite"},
 ];
 
 export const quickLinksData = [

@@ -5,7 +5,6 @@ import NotFoundPage from "../../Not-found";
 import { HiMiniStar } from "react-icons/hi2";
 import PriceView from "@/components/PriceView";
 import AddToCartButton from "@/components/AddToCartButton";
-import FavoriteButton from "@/components/FavoriteButton";
 import ProductCharacteristics from "@/components/ProductCharacteristics";
 import { FaRegQuestionCircle } from "react-icons/fa";
 import { FiShare2 } from "react-icons/fi";

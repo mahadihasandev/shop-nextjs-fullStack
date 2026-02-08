@@ -1,20 +1,18 @@
 'use client'
 import { cn } from '@/lib/utils'
-import { Product } from '@/sanity.types'
 import useStore from '@/store'
 import { HeartPlus } from 'lucide-react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import React from 'react'
 
 const FavoriteButton = ({
-  product,
-  showProduct=true,
+ 
   className}:{
-  product:Product
-  showProduct:boolean;
   className?:string;
 }) => {
   const {favoriteProduct}=useStore()
+  const pathname = usePathname();
   return (
 <>
 {favoriteProduct?.length>0?(
@@ -25,6 +23,10 @@ const FavoriteButton = ({
       text-white h-3.5 w-3.5 rounded-full text-xs font-semibold 
       flex items-center justify-center scale-90 group-hover:scale-100 
       hoverEffect'>{favoriteProduct?.length?favoriteProduct?.length:0}</span>
+      <span
+        className={`absolute inset-0 -z-10 bg-blue-200 -left-[39%] -top-2.5 p-5 rounded-2xl w-[150%] 
+          scale-0 hoverEffect origin-center ${pathname == "/wishlist" && "scale-100"}`}
+      />
     </Link>
 ):<button className='group relative hover:text-shop_light_blue hoverEffect 
  hover:border-shop_light_blue rounded-md'>
