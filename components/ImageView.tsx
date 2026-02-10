@@ -30,7 +30,7 @@ const ImageView = ({ images = [], isStock }: Props) => {
   const [active, setActive] = useState(images[0]);
 
   return (
-    <div className="w-full space-y-2 md:space-y-4">
+    <div className="w-full space-y-2 md:space-y-4 ">
       <AnimatePresence mode="wait">
         <motion.div
           key={active?._key}
@@ -45,7 +45,7 @@ const ImageView = ({ images = [], isStock }: Props) => {
           }}
           transition={{ duration: 0.5 }}
           className="w-full max-h-[550px] min-h-[500px] 
-          border border-darkColor/10 rounded-md group overflow-hidden"
+          shadow-md shadow-shop_light_blue/30 border border-darkColor/10 rounded-md group overflow-hidden"
         >
           <Image
             src={urlFor(active).url()}

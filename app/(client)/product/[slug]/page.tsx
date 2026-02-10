@@ -37,7 +37,7 @@ const SingleProductPage = async ({
           )}
         </div>
         <div className="w-full md:w-1/2 flex flex-col gap-5">
-          <div className="space-y-1 pt-10">
+          <div className="space-y-1 pt-10 ">
             <h2 className="text-2xl font-bold font-poppins">{product?.name}</h2>
             <div className="text-normal text-gray-600 font-poppins tracking-wide font-normal">
               {product?.keyfeature && (
@@ -98,7 +98,7 @@ const SingleProductPage = async ({
               <p>Share</p>
             </div>
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col shadow-md shadow-shop_light_blue/20">
             <div className="border border-lightColor/25 border-b-0 p-3 flex items-center gap-2.5">
               <BsTruck size={30} className="text-shop_orange" />
               <div>
