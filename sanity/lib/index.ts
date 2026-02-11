@@ -4,6 +4,7 @@ import {
   BRANDS_QUERY,
   BRAND_QUERY,
   HOT_DEAL_QUERY,
+  ORDER_QUERY,
   SINGLE_PRODUCT_QUERY,
 } from "./query";
 
@@ -91,11 +92,25 @@ const getBrands=async(slug:string)=>{
   }
 }
 
+const getOrder=async(userId:string)=>{
+  try {
+    const order=await sanityFetch({
+      query:ORDER_QUERY,
+      params:{userId}
+    })
+    return order?.data||null
+  } catch (error) {
+    console.log(error,"Error fetching order")
+    return null
+  }
+}
+
 export {
   getCategories,
   getAllBrands,
   getLatestBlogs,
   getHotDeals,
   getSingleProduct,
-  getBrands
+  getBrands,
+  getOrder,
 };

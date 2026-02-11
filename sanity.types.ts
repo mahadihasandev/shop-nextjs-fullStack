@@ -13,6 +13,55 @@
  */
 
 // Source: schema.json
+export type Order = {
+  _id: string;
+  _type: "order";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  orderNumber?: string;
+  invoice?: {
+    id?: string;
+    number?: string;
+    hosted_invoice_url?: string;
+  };
+  stripeCheckoutSessionId?: string;
+  stripeCustomerId?: string;
+  clerkUserId?: string;
+  customerName?: string;
+  email?: string;
+  stripePaymentIntentId?: string;
+  products?: Array<{
+    product?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "product";
+    };
+    quantity?: number;
+    _key: string;
+  }>;
+  totalPrice?: number;
+  currency?: string;
+  amountDiscount?: number;
+  address?: {
+    state?: string;
+    zip?: string;
+    city?: string;
+    address?: string;
+    name?: string;
+  };
+  status?:
+    | "pending"
+    | "processing"
+    | "paid"
+    | "shipped"
+    | "out_for_delivery"
+    | "delivered"
+    | "cancelled";
+  orderDate?: string;
+};
+
 export type Banner = {
   _id: string;
   _type: "banner";
@@ -393,6 +442,7 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
+  | Order
   | Banner
   | SanityImageCrop
   | SanityImageHotspot
@@ -574,6 +624,69 @@ export type BRANDS_QUERY_RESULT = Array<{
   brandName: string | null;
 }>;
 
+// Source: sanity/lib/query.ts
+// Variable: ORDER_QUERY
+// Query: *[_type == "order" && clerkUserId == $userId] | order(orderDate desc){    ...,products[]{      ...,product->{        name,price,images      }    }  }
+export type ORDER_QUERY_RESULT = Array<{
+  _id: string;
+  _type: "order";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  orderNumber?: string;
+  invoice?: {
+    id?: string;
+    number?: string;
+    hosted_invoice_url?: string;
+  };
+  stripeCheckoutSessionId?: string;
+  stripeCustomerId?: string;
+  clerkUserId?: string;
+  customerName?: string;
+  email?: string;
+  stripePaymentIntentId?: string;
+  products: Array<{
+    product: {
+      name: string | null;
+      price: number | null;
+      images: Array<{
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+        _key: string;
+      }> | null;
+    } | null;
+    quantity?: number;
+    _key: string;
+  }> | null;
+  totalPrice?: number;
+  currency?: string;
+  amountDiscount?: number;
+  address?: {
+    state?: string;
+    zip?: string;
+    city?: string;
+    address?: string;
+    name?: string;
+  };
+  status?:
+    | "cancelled"
+    | "delivered"
+    | "out_for_delivery"
+    | "paid"
+    | "pending"
+    | "processing"
+    | "shipped";
+  orderDate?: string;
+}>;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
@@ -583,5 +696,6 @@ declare module "@sanity/client" {
     '*[_type == "product"&& status=="hot"]| order(name asc){\n  ...,"categories":categories[]->title\n}': HOT_DEAL_QUERY_RESULT;
     '*[_type == "product" && slug.current==$slug]| order(name asc) [0]': SINGLE_PRODUCT_QUERY_RESULT;
     "*[_type=='product' && slug.current==$slug]{\n  \"brandName\":brand->title\n}": BRANDS_QUERY_RESULT;
+    '*[_type == "order" && clerkUserId == $userId] | order(orderDate desc){\n    ...,products[]{\n      ...,product->{\n        name,price,images\n      }\n    }\n  }': ORDER_QUERY_RESULT;
   }
 }
