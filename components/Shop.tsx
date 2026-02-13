@@ -11,7 +11,6 @@ import { client } from "@/sanity/lib/client";
 import ProductCard from "./ProductCard";
 import { TbLoader3 } from "react-icons/tb";
 import { AnimatePresence, motion } from "motion/react";
-import NoProductAvailable from "./NoProductAvailable";
 
 interface Props {
   categories: Category[];
@@ -21,11 +20,16 @@ const Shop = ({ categories, brands }: Props) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
   const searchParams = useSearchParams();
-  const brandParams = searchParams.get('brand');
+  const brandParams = searchParams.get("brand");
+  const priceParams = searchParams.get("price");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [selectedBrand, setSelectedBrand] = useState<string | null>(brandParams||null);
-  const [selectedPrice, setSelectedPrice] = useState<string | null>(null);
-  
+  const [selectedBrand, setSelectedBrand] = useState<string | null>(
+    brandParams || null,
+  );
+  const [selectedPrice, setSelectedPrice] = useState<string | null>(
+    priceParams || null,
+  );
+
   const fetchProduct = async () => {
     setLoading(true);
     try {
@@ -60,6 +64,11 @@ const Shop = ({ categories, brands }: Props) => {
       setLoading(false);
     }
   };
+  useEffect(() => {
+    if (brandParams) setSelectedBrand(brandParams);
+    if (priceParams) setSelectedPrice(priceParams);
+  }, [brandParams, priceParams]);
+
   useEffect(() => {
     fetchProduct();
   }, [selectedCategory, selectedBrand, selectedPrice]);
@@ -117,38 +126,42 @@ const Shop = ({ categories, brands }: Props) => {
 
           <div className="py-5 flex-1 ">
             <div className="h-calc(100vh-160px) ">
-            {loading ? (
-              <div className="flex flex-col items-center justify-center 
+              {loading ? (
+                <div
+                  className="flex flex-col items-center justify-center 
             py-10 min-h-120 space-y-4 text-center bg-gray-100 w-full
             rounded-lg"
-              >
-                <div className="space-x-2 flex items-center text-blue-600 ">
-                  <TbLoader3 className="w-20 h-9 animate-spin text-shop_light_blue" />
-                  <span>Product is Loading...</span>
+                >
+                  <div className="space-x-2 flex items-center text-blue-600 ">
+                    <TbLoader3 className="w-20 h-9 animate-spin text-shop_light_blue" />
+                    <span>Product is Loading...</span>
+                  </div>
                 </div>
-              </div>
-            ) : (
-              products?.length > 0 && (
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-                  {products?.map((item: Product) => (
-                    <AnimatePresence key={item?._id}>
-                      <motion.div
-                        layout
-                        initial={{ opacity: 0.2 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 1 }}
-                      >
-                        <div>
-                          <ProductCard className="scale-100 hover:scale-103" product={item} />
-                        </div>
-                      </motion.div>
-                    </AnimatePresence>
-                  ))}
-                </div>
-              )
-            )}
-          </div>
+              ) : (
+                products?.length > 0 && (
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+                    {products?.map((item: Product) => (
+                      <AnimatePresence key={item?._id}>
+                        <motion.div
+                          layout
+                          initial={{ opacity: 0.2 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 1 }}
+                        >
+                          <div>
+                            <ProductCard
+                              className="scale-100 hover:scale-103"
+                              product={item}
+                            />
+                          </div>
+                        </motion.div>
+                      </AnimatePresence>
+                    ))}
+                  </div>
+                )
+              )}
+            </div>
           </div>
         </div>
       </Container>
