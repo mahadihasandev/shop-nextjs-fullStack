@@ -6,9 +6,11 @@ import { BlockContentType } from "./BlockContentType";
 import { BlogCategoryType } from "./BlogCategoryType";
 import { BlogType } from "./BlogType";
 import { ProductType } from "./ProductType";
-import { BannerType } from "./Bannertype";
+
 import { OrderType } from "./OrderType";
-import { BrandType } from "./brandType";
+import { BrandType } from "./BrandTypes";
+import { BannerType } from "./Bannertype";
+
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
