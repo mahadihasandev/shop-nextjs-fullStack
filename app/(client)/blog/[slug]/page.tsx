@@ -1,6 +1,6 @@
 import Container from "@/components/Container";
 import { Title } from "@/components/ui/text";
-import { BLOG_CATEGORIES_RESULT, Blog, OTHERS_BLOG_QUERY_RESULT, SINGLE_BLOG_QUERY_RESULT } from "@/sanity.types";
+import { SINGLE_BLOG_QUERY_RESULT } from "@/sanity.types";
 import { getBlogCategories, getOthersBlog, getSingleBlog } from "@/sanity/lib";
 import { urlFor } from "@/sanity/lib/image";
 
@@ -10,7 +10,7 @@ import { PortableText } from "next-sanity";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import React from "react";
+
 
 const SingleBlogPage = async ({
   params,
@@ -159,7 +159,7 @@ const SingleBlogPage = async ({
                             return (
                               <Link
                                 href={value.href}
-                                className="font-medium text-gray-950 underline decoration-gray-400 underline-offset-4 data-[hover]:decoration-gray-600"
+                                className="font-medium text-gray-950 underline decoration-gray-400 underline-offset-4 hover:decoration-gray-600 hoverEffect"
                               >
                                 {children}
                               </Link>
