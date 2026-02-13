@@ -20,7 +20,7 @@ const FavoriteButton = ({
       <HeartPlus className='text-shop_dark_blue w-5 h-5 
       group-hover:text-shop_light_blue hoverEffect'/>
       <span className='absolute -top-1 -right-1 bg-red-600 
-      text-white h-3.5 w-3.5 rounded-full text-xs font-semibold 
+      text-white h-3.5 w-3.5 rounded-full text-xs p-1 font-semibold 
       flex items-center justify-center scale-90 group-hover:scale-100 
       hoverEffect'>{favoriteProduct?.length?favoriteProduct?.length:0}</span>
       <span

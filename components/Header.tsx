@@ -9,11 +9,17 @@ import SignIn from './SignIn'
 import MobileMenu from './MobileMenu'
 import { currentUser } from '@clerk/nextjs/server'
 import { ClerkLoaded, SignedIn, UserButton } from '@clerk/nextjs'
+import { getOrder } from '@/sanity/lib'
+import OrderLogButton from './OrderLogButton'
+import { ORDER_QUERY_RESULT } from '@/sanity.types'
 
 const Header = async() => {
-  const user=await currentUser()
+  const user=await currentUser();
+  let order
   
-  
+  if(user?.id){
+    order=await getOrder(user?.id as string);
+  }
   return (
     <header className='bg-blue-50/70 py-5 sticky top-0 z-50 backdrop-blur-md shadow-md rounded-b-lg'>
             <Container className='flex justify-between items-center text-lightColor'>
@@ -31,6 +37,7 @@ const Header = async() => {
               <FavoriteButton />
               <ClerkLoaded>
                 <SignedIn>
+                 <OrderLogButton order={order}/>
                   <UserButton/>
                 </SignedIn>
                 {!user&&<SignIn/>}

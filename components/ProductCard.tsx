@@ -59,7 +59,7 @@ const ProductCard = ({
       </div>
       <div className="p-3">
         {product?.categories && (
-          <p className="uppercase line-clamp-1 text-xs font-sans text-shop_light_text">
+          <p className="uppercase line-clamp text-xs font-sans text-shop_light_text">
             {product?.categories?.map((cat) => cat).join(",")}
           </p>
         )}

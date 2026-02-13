@@ -40,7 +40,7 @@ const CartPage = () => {
     getSubtotalPrice,
     resetCart,
   } = useStore();
-  const [isClient, setIsClient] = useState(false);
+
   const [loading, setLoading] = useState(false);
   const groupedItems = useStore((state) => state.getGroupedItem());
   const { isSignedIn } = useAuth();

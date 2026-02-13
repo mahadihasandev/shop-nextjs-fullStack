@@ -28,7 +28,7 @@ const LatestBlog = async () => {
               </Link>
             )}
             <div className="bg-shop_light_bg p-5">
-              <div className="text-xs flex items-center gap-5">
+              <div className="text-xs flex items-center gap-20">
                 <div className="flex items-center relative group cursor-pointer">
                     {blog.blogcategories?.map((category,index)=>(
                         <p className="font-semibold tracking-wider 
