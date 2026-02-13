@@ -11,7 +11,7 @@ import { currentUser } from '@clerk/nextjs/server'
 import { ClerkLoaded, SignedIn, UserButton } from '@clerk/nextjs'
 import { getOrder } from '@/sanity/lib'
 import OrderLogButton from './OrderLogButton'
-import { ORDER_QUERY_RESULT } from '@/sanity.types'
+
 
 const Header = async() => {
   const user=await currentUser();
