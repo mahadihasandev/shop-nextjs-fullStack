@@ -11,6 +11,12 @@ import { client } from "@/sanity/lib/client";
 import ProductCard from "./ProductCard";
 import { TbLoader3 } from "react-icons/tb";
 import { AnimatePresence, motion } from "motion/react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 interface Props {
   categories: Category[];
@@ -105,7 +111,7 @@ const Shop = ({ categories, brands }: Props) => {
         </div>
         <div className="flex flex-col md:flex-row rounded-md gap-2 shadow-[0px_0px_6px_-2px_#1E90FF]">
           <div
-            className="md:sticky md:top-20 md:self-start shadow-[3px_1px_6px_-4px_#1E90FF] rounded-md
+            className="hidden md:inline-block md:sticky md:top-20 md:self-start shadow-[3px_1px_6px_-4px_#1E90FF] rounded-md
           md:h-[calc(100vh-160px)] md:overflow-y-scroll scrollbar-hide md:min-w-64 pb-5"
           >
             <CategoryList
@@ -123,6 +129,40 @@ const Shop = ({ categories, brands }: Props) => {
               setSelectedPrice={setSelectedPrice}
             />
           </div>
+
+          <Accordion type="single" collapsible className="max-w-lg md:hidden">
+            <AccordionItem value="category">
+              <AccordionTrigger
+                className="text-shop_dark_blue/80 text-lg tracking-wider 
+        font-semibold border border-shop_light_blue/30  
+         shadow hoverEffect shadow-shop_light_blue/30 
+        hover:shadow-shop_light_blue/50 hover:border-shop_light_blue/50 rounded-md px-10 py-3 "
+              >
+                Filter
+              </AccordionTrigger>
+              <AccordionContent>
+                <div
+                  className="md:sticky md:top-20 md:self-start shadow-[3px_1px_6px_-4px_#1E90FF] rounded-md
+          md:h-[calc(100vh-160px)] md:overflow-y-scroll scrollbar-hide md:min-w-64 pb-5"
+                >
+                  <CategoryList
+                    categories={categories}
+                    selectedCategory={selectedCategory}
+                    setSelectedCategory={setSelectedCategory}
+                  />
+                  <BrandList
+                    brands={brands}
+                    selectedBrand={selectedBrand}
+                    setSelectedBrand={setSelectedBrand}
+                  />
+                  <PriceList
+                    selectedPrice={selectedPrice}
+                    setSelectedPrice={setSelectedPrice}
+                  />
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
 
           <div className="py-5 flex-1 ">
             <div className="h-calc(100vh-160px) ">
