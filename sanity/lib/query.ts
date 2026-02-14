@@ -78,7 +78,7 @@ const OTHERS_BLOG_QUERY = defineQuery(`*[
   }`);
 
 const PRODUCT_SEARCH_QUERY = defineQuery(
-  `*[_type == "product" && (title match $searchParam || description match $searchParam)] | order(name asc)`,
+  `*[_type == "product" && (name match $searchParam || description match $searchParam)] | order(name asc)`,
 );
 
 export {
