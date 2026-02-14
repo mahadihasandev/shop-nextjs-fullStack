@@ -31,7 +31,7 @@ const Header = async() => {
               <HeaderMenu/>
             </div>
             
-            <div className='w-auto md:w-1/3 flex items-center justify-end gap-5'>
+            <div className='w-auto md:w-1/3 flex items-center justify-end gap-2.5 md:gap-5'>
               <SearchBar/>
               <CartIcon/>
               <FavoriteButton />

@@ -16,7 +16,7 @@ const SideMenu:FC<SideMenuProps> = ({isOpen,onClose}) => {
   const sideBarRef=useOutSideClick<HTMLDivElement>(onClose)
   return (
     <div 
-    className={`fixed text-white/80 inset-y-0 h-screen left-0 z-50 w-full bg-black/60 shadow-xl ${isOpen?'translate-x-0':'-translate-x-full'} hoverEffect`}>
+    className={`fixed text-white/80 inset-y-0 h-screen left-0 z-50 w-full bg-black shadow-xl ${isOpen?'translate-x-0':'-translate-x-full'} hoverEffect`}>
       <div 
       className=' min-w-72 max-w-96 bg-black/95 h-screen p-10 border-r-2 border-blue-700 flex flex-col gap-6'>
         <div className='flex items-center justify-between gap-5'>
