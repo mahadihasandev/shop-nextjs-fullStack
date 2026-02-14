@@ -27,11 +27,13 @@ const ORDER_QUERY =
     }
   }`);
 
-  const ALL_BLOG_QUERY=defineQuery(`*[_type == "blog"]| order(name asc)[0...$quantity]{
+const ALL_BLOG_QUERY =
+  defineQuery(`*[_type == "blog"]| order(name asc)[0...$quantity]{
   ...,blogcategories[]->{title}
 }`);
 
-const SINGLE_BLOG_QUERY=defineQuery(`*[_type == "blog" && slug.current==$slug]| order(name asc) [0]{
+const SINGLE_BLOG_QUERY =
+  defineQuery(`*[_type == "blog" && slug.current==$slug]| order(name asc) [0]{
   ...,
   author->{
     title,
@@ -45,14 +47,14 @@ const SINGLE_BLOG_QUERY=defineQuery(`*[_type == "blog" && slug.current==$slug]| 
   },
   
   
-}`)
+}`);
 
 const BLOG_CATEGORIES = defineQuery(
   `*[_type == "blog"]{
      blogcategories[]->{
     ...
     }
-  }`
+  }`,
 );
 
 const OTHERS_BLOG_QUERY = defineQuery(`*[
@@ -75,8 +77,9 @@ const OTHERS_BLOG_QUERY = defineQuery(`*[
   }
   }`);
 
-
-
+const PRODUCT_SEARCH_QUERY = defineQuery(
+  `*[_type == "product" && (title match $searchParam || description match $searchParam)] | order(name asc)`,
+);
 
 export {
   BLOG_QUERY,
@@ -89,4 +92,5 @@ export {
   SINGLE_BLOG_QUERY,
   BLOG_CATEGORIES,
   OTHERS_BLOG_QUERY,
+  PRODUCT_SEARCH_QUERY,
 };

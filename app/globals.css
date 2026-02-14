@@ -3,19 +3,19 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@theme{
+@theme {
   --font-poppins: "Poppins", sans-serif;
   --color-shop_light_pink: #fcf0e4;
   --color-shop_dark_blue: #191970;
-  --color-shop_light_blue:#1E90FF;
-  --color-shop_lighter_blue:#53aaff;
-  --color-shop_btn_dark_green: #063D29;
+  --color-shop_light_blue: #1e90ff;
+  --color-shop_lighter_blue: #53aaff;
+  --color-shop_btn_dark_green: #063d29;
   --color-shop_light_bg: #f6f6f6;
-  --color-shop_light_orang:#ff9248;
-  --color-shop_orange: 	#ff6700;
-  --color-shop_light_text:#686e7d;
-  --color-shop_lighter_text:#ababab;
-  --color-deal-bg:#f1f3f8;
+  --color-shop_light_orang: #ff9248;
+  --color-shop_orange: #ff6700;
+  --color-shop_light_text: #686e7d;
+  --color-shop_lighter_text: #ababab;
+  --color-deal-bg: #f1f3f8;
   --color-darkColor: #151515;
   --color-lightColor: #52525b;
   --color-lightOrange: #fca99b;
@@ -27,7 +27,6 @@
   --color-lightText: #3D991;
   --color-lightGreen: #f1f3f;
   --color-productBg: #c3c;
-  
 }
 
 @theme inline {
@@ -148,19 +147,36 @@
   body {
     @apply bg-background text-foreground;
   }
-  .hoverEffect{
+  .hoverEffect {
     @apply transition-all duration-300 ease-in-out;
   }
-  button{
-    @apply hover:cursor-pointer
+  button {
+    @apply hover:cursor-pointer;
   }
 }
 
-body{
+body {
   font-family: var(--font-poppins);
 }
 
 /* Hide scrollbar for WebKit browsers */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #cbd5e1;
 }

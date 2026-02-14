@@ -83,57 +83,57 @@ const getSingleProduct = async (slug: string) => {
   }
 };
 
-const getBrands=async(slug:string)=>{
+const getBrands = async (slug: string) => {
   try {
-    const brands=await sanityFetch({
-      query:BRANDS_QUERY,
-      params:{slug}
-    })
-    return brands?.data||null
+    const brands = await sanityFetch({
+      query: BRANDS_QUERY,
+      params: { slug },
+    });
+    return brands?.data || null;
   } catch (error) {
-    console.log(error,"Error fetching brands")
-    return null
+    console.log(error, "Error fetching brands");
+    return null;
   }
-}
+};
 
-const getOrder=async(userId:string)=>{
+const getOrder = async (userId: string) => {
   try {
-    const order=await sanityFetch({
-      query:ORDER_QUERY,
-      params:{userId},
-    })
-    return order?.data||null
+    const order = await sanityFetch({
+      query: ORDER_QUERY,
+      params: { userId },
+    });
+    return order?.data || null;
   } catch (error) {
-    console.log(error,"Error fetching order")
-    return null
+    console.log(error, "Error fetching order");
+    return null;
   }
-}
+};
 
-const getAllBlogs=async(quantity:number)=>{
+const getAllBlogs = async (quantity: number) => {
   try {
-    const blogs=await sanityFetch({
-      query:ALL_BLOG_QUERY,
-      params:{quantity}
-    })
-    return blogs?.data||null
+    const blogs = await sanityFetch({
+      query: ALL_BLOG_QUERY,
+      params: { quantity },
+    });
+    return blogs?.data || null;
   } catch (error) {
-    console.log(error,"Error fetching blogs")
-    return null
+    console.log(error, "Error fetching blogs");
+    return null;
   }
-}
+};
 
-const getSingleBlog=async(slug:string)=>{
+const getSingleBlog = async (slug: string) => {
   try {
-    const blog=await sanityFetch({
-      query:SINGLE_BLOG_QUERY,
-      params:{slug}
-    })
-    return blog?.data||null
+    const blog = await sanityFetch({
+      query: SINGLE_BLOG_QUERY,
+      params: { slug },
+    });
+    return blog?.data || null;
   } catch (error) {
-    console.log(error,"Error fetching blog")
-    return null
+    console.log(error, "Error fetching blog");
+    return null;
   }
-}
+};
 
 const getBlogCategories = async () => {
   try {
