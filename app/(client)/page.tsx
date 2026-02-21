@@ -17,7 +17,7 @@ const page = async() => {
      <Container>
      <HomeBanner/>
      <StaticHomeBanner/>
-     <div className='py-10'>
+     <div className='md:py-10 py-5'>
       <ProductGrid/>
      </div>
      <HomeCategories categories={categories}/>
