@@ -14,7 +14,7 @@ const StaticHomeBanner = () => {
           </Title>
           <Link
             href={{ pathname: "/shop", query: { price: "100-500" } }}
-            className="bg-shop_dark_blue/90 text-white px-5 py-2 rounded-md text-sm font-semibold hover:bg-shop_light_blue hover:text-white hoverEffect"
+            className="bg-shop_dark_blue/90 text-white px-4 py-2 rounded-md text-sm inline-block font-semibold hover:bg-shop_light_blue hover:text-white hoverEffect"
           >
             Buy Now
           </Link>
