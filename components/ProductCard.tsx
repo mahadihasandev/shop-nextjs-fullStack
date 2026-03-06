@@ -9,16 +9,21 @@ import { HiMiniStar } from "react-icons/hi2";
 import PriceView from "./PriceView";
 import AddToCartButton from "./AddToCartButton";
 import { cn } from "@/lib/utils";
-interface Props{
-  product:Product;
-  className?:string;
+
+interface Props {
+  product: Product;
+  className?: string;
 }
-const ProductCard = ({
-  product,
-  className
-}: Props) => {
+
+// Reusable card component for displaying a product in a grid
+const ProductCard = ({ product, className }: Props) => {
   return (
-    <div className={cn(`border border-shop_dark_blue/20 group bg-white rounded-md shadow-[2px_2px_5px_-2px_#29b8ff] hover:scale-105 hoverEffect`,className)}>
+    <div
+      className={cn(
+        `border border-shop_dark_blue/20 group bg-white rounded-md shadow-[2px_2px_5px_-2px_#29b8ff] hover:scale-105 hoverEffect`,
+        className,
+      )}
+    >
       <div className="relative bg-shop_light_bg rounded-md overflow-hidden">
         <Link href={`/product/${product?.slug?.current}`}>
           {product?.images && (
@@ -33,7 +38,11 @@ const ProductCard = ({
             />
           )}
         </Link>
-        <AddToWishListButton product={product} className="absolute top-1 right-2 z-10" />
+        <AddToWishListButton
+          product={product}
+          className="absolute top-1 right-2 z-10"
+        />
+
         {product?.status == "sale" && (
           <p className="absolute left-2 top-2 z-10 text-xs border border-darkColor/50 px-2 rounded-full group-hover:border-shop_light_blue group-hover:text-darkColor hoverEffect group-hover:bg-shop_light_blue/20 ">
             Sale!
@@ -57,13 +66,16 @@ const ProductCard = ({
           </Link>
         )}
       </div>
+
       <div className="p-3">
         {product?.categories && (
           <p className="uppercase line-clamp-1 text-xs font-sans text-shop_light_text">
             {product?.categories?.map((cat) => cat).join(",")}
           </p>
         )}
+
         <Title className="text-sm! line-clamp-1">{product?.name}</Title>
+
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-0.5">
             {[...Array(5)].map((_, index) => (
@@ -79,6 +91,7 @@ const ProductCard = ({
           </div>
           <p className="text-xs tracking-wide text-shop_light_text">5 Review</p>
         </div>
+
         <div className="flex items-center gap-2.5">
           <p className="font-medium text-sm font-sans">In Stock</p>
           <p
@@ -87,6 +100,7 @@ const ProductCard = ({
             {(product?.stock as number) > 0 ? product?.stock : "unavailable"}
           </p>
         </div>
+
         <PriceView
           price={product?.price}
           discount={product?.discount}

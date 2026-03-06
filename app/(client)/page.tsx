@@ -1,30 +1,31 @@
-import Container from '@/components/Container'
-import HomeBanner from '@/components/HomeBanner'
-import HomeCategories from '@/components/HomeCategories'
-import LatestBlog from '@/components/LatestBlog'
-import ProductGrid from '@/components/ProductGrid'
-import ShopByBrands from '@/components/ShopByBrands'
-import StaticHomeBanner from '@/components/StaticHomeBanner'
-import { getCategories } from '@/sanity/lib'
+import Container from "@/components/Container";
+import HomeBanner from "@/components/HomeBanner";
+import HomeCategories from "@/components/HomeCategories";
+import LatestBlog from "@/components/LatestBlog";
+import ProductGrid from "@/components/ProductGrid";
+import ShopByBrands from "@/components/ShopByBrands";
+import StaticHomeBanner from "@/components/StaticHomeBanner";
+import { getCategories } from "@/sanity/lib";
 
+// Main storefront homepage (Server Component fetching initial data)
+const page = async () => {
+  const categories = await getCategories(6);
 
-const page = async() => {
-  const categories=await getCategories(6)
- 
-  
-  
   return (
-     <Container>
-     <HomeBanner/>
-     <StaticHomeBanner/>
-     <div className='md:py-10 py-5'>
-      <ProductGrid/>
-     </div>
-     <HomeCategories categories={categories}/>
-     <ShopByBrands/>
-     <LatestBlog/>     
-    </Container>
-  )
-}
+    <Container>
+      <HomeBanner />
+      <StaticHomeBanner />
 
-export default page
+      <div className="md:py-10 py-5">
+        <ProductGrid />
+      </div>
+
+      <HomeCategories categories={categories} />
+
+      <ShopByBrands />
+      <LatestBlog />
+    </Container>
+  );
+};
+
+export default page;
